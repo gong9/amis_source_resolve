@@ -8,10 +8,10 @@ import find from 'lodash/find';
 import PropTypes from 'prop-types';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import qs from 'qs';
-import {dataMapping} from './utils/tpl-builtin';
-import {RendererEnv, RendererProps} from './factory';
-import {noop, autobind, qsstringify} from './utils/helper';
-import {RendererData, Action} from './types';
+import { dataMapping } from './utils/tpl-builtin';
+import { RendererEnv, RendererProps } from './factory';
+import { noop, autobind, qsstringify } from './utils/helper';
+import { RendererData, Action } from './types';
 
 export interface ScopedComponentType extends React.Component<RendererProps> {
   focus?: () => void;
@@ -203,6 +203,7 @@ function closeDialog(component: ScopedComponentType) {
   component.props.onClose && component.props.onClose();
 }
 
+//gong 这里是最后一层包装
 export function HocScoped<
   T extends {
     $path?: string;
@@ -222,9 +223,8 @@ export function HocScoped<
       scopeRef?: (ref: any) => void;
     }
   > {
-    static displayName = `Scoped(${
-      ComposedComponent.displayName || ComposedComponent.name
-    })`;
+    static displayName = `Scoped(${ComposedComponent.displayName || ComposedComponent.name
+      })`;
     static contextType = ScopedContext;
     static ComposedComponent = ComposedComponent;
     ref: any;
@@ -255,13 +255,13 @@ export function HocScoped<
     }
 
     render() {
-      const {scopeRef, ...rest} = this.props;
+      const { scopeRef, ...rest } = this.props;
 
       return (
         <ScopedContext.Provider value={this.scoped}>
           <ComposedComponent
             {
-              ...(rest as any) /* todo */
+            ...(rest as any) /* todo */
             }
             ref={this.childRef}
           />
@@ -271,6 +271,8 @@ export function HocScoped<
   }
 
   hoistNonReactStatic(ScopedComponent, ComposedComponent);
+  console.log('gong===========这里应该时最后走得了吧');
+
   return ScopedComponent;
 }
 

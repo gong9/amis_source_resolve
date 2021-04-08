@@ -101,6 +101,7 @@ export class SchemaRenderer extends React.Component<SchemaRendererProps, any> {
     return false;
   }
 
+  //gong 这个东西应该只是返回schema对应的模板地址
   resolveRenderer(props: SchemaRendererProps, skipResolve = false): any {
     let schema = props.schema;
     let path = props.$path;
@@ -115,8 +116,22 @@ export class SchemaRenderer extends React.Component<SchemaRendererProps, any> {
     }
 
     if (!skipResolve) {
+
       const rendererResolver = props.env.rendererResolver || resolveRenderer;
+      //gong    这不是this的renderer的由来嘛
       this.renderer = rendererResolver(path, schema, props);
+      //gong 这里得到得就是
+      /**
+       * {
+            Renderer: class PageRenderer
+            component: class ScopedComponent
+            isolateScope: true
+            name: "page"
+            storeType: "ServiceStore"
+            test: /(?:^|\/)page$/
+            weight: 0
+          }
+       */
     }
     console.log('------------------------------------------------------');
 
@@ -248,12 +263,26 @@ export class SchemaRenderer extends React.Component<SchemaRendererProps, any> {
 
     const { data: defaultData, ...restSchema } = schema;
     const Component = renderer.component;
+    console.log('gong test04------我看看这个render是从哪里来的');
+    console.log(this);
 
-    let gong = { ...restSchema }
-    console.log(gong);
+
+
 
     return (
-      //gong 这里把schema解构出来之后塞入了下面这个组件里了
+      //gong 这里把schema解构出来之后塞入了下面这个组件里了（到了这基本上就完事了，思路稍微闭合了）
+
+      /**
+       * {
+            Renderer: class PageRenderer
+            component: class ScopedComponent
+            isolateScope: true
+            name: "page"
+            storeType: "ServiceStore"
+            test: /(?:^|\/)page$/
+            weight: 0
+          }
+       */
       <Component
         {...theme.getRendererConfig(renderer.name)}
         {...restSchema}

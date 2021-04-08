@@ -117,7 +117,7 @@ export interface fetcherConfig {
   data?: any;
   config?: any;
 }
-
+//gong 这里面装的什么鬼玩意哦
 const renderers: Array<RendererConfig> = [];
 const rendererNames: Array<string> = [];
 const schemaFilters: Array<RenderSchemaFilter> = [];
@@ -421,6 +421,9 @@ export function updateEnv(options: Partial<RenderOptions>, session = 'global') {
 }
 
 let cache: { [propName: string]: RendererConfig } = {};
+
+
+//gong 我这里只要搞清出这个东西是做什么的
 export function resolveRenderer(
   path: string,
   schema?: Schema
@@ -430,13 +433,20 @@ export function resolveRenderer(
   } else if (path && path.length > 1024) {
     throw new Error('Path太长是不是死循环了？');
   }
+  console.log('resolveRenderer=====================resolveRenderer======resolveRenderer', path, schema);
+  ;
+
+  //gong  =====给到这里的参数  1. page       2. {type: "page", body: "test"}
+  console.log(renderers);
+
 
   let renderer: null | RendererConfig = null;
 
+  //gong 怎么没有东西来接收它得返回值呢？
   renderers.some(item => {
     let matched = false;
 
-    // 不应该搞得这么复杂的，让每个渲染器唯一 id，自己不晕别人用起来也不晕。
+    // 不应该搞得这么复杂的，让每个渲染器唯一 id，自己不晕别人用起来也不晕。（确实你搞得太复杂了这个config数组也忒长了点吧）
     if (typeof item.test === 'function') {
       matched = item.test(path, schema, resolveRenderer);
     } else if (item.test instanceof RegExp) {
@@ -460,6 +470,7 @@ export function resolveRenderer(
   ) {
     cache[path] = renderer;
   }
+  console.log(renderer);
 
   return renderer;
 }
