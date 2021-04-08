@@ -1,0 +1,86 @@
+.#{$ns}SubForm {
+  &-values {
+    display: inline-block;
+    margin-top: calc(var(--gap-xs) * -1);
+    padding: calc(
+        (
+            var(--Form-input-height) - var(--Form-input-lineHeight) *
+              var(--Form-input-fontSize) - #{px2rem(2px)}
+          ) / 2
+      )
+      0;
+  }
+
+  &-value {
+    cursor: pointer;
+    user-select: none;
+    line-height: calc(
+      var(--Form-input-lineHeight) * var(--Form-input-fontSize) - #{px2rem(2px)}
+    );
+    display: inline-block;
+    font-size: var(--Form-selectValue-fontSize);
+    color: var(--Form-selectValue-color);
+    background: var(--Form-selectValue-bg);
+    border: px2rem(1px) solid var(--Form-selectValue-borderColor);
+    border-radius: 2px;
+    margin-right: var(--gap-xs);
+    margin-top: var(--gap-xs);
+
+    &:hover {
+      background: var(--Form-selectValue-onHover-bg);
+    }
+
+    &.is-disabled {
+      pointer-events: none;
+      opacity: var(--Button-onDisabled-opacity);
+    }
+  }
+
+  &-valueIcon {
+    cursor: pointer;
+    border-right: px2rem(1px) solid var(--Form-selectValue-borderColor);
+    padding: 1px 5px;
+
+    &:hover {
+      background: var(--Form-selectValue-onHover-bg);
+    }
+  }
+
+  &-valueLabel {
+    padding: 0 var(--gap-xs);
+  }
+
+  &-addBtn {
+    font-size: var(--SubForm--addBtn-fontSize);
+
+    @include button-size(
+      var(--SubForm--addBtn-paddingY),
+      var(--SubForm--addBtn-paddingX),
+      var(--SubForm--addBtn-fontSize),
+      var(--SubForm--addBtn-lineHeight),
+      var(--SubForm--addBtn-borderRadius),
+      var(--SubForm--addBtn-height)
+    );
+
+    @include button-variant(
+      var(--SubForm--addBtn-bg),
+      var(--SubForm--addBtn-border),
+      var(--SubForm--addBtn-color),
+      var(--SubForm--addBtn-onHover-bg),
+      var(--SubForm--addBtn-onHover-border),
+      var(--SubForm--addBtn-onHover-color),
+      var(--SubForm--addBtn-onActive-bg),
+      var(--SubForm--addBtn-onActive-border),
+      var(--SubForm--addBtn-onActive-color)
+    );
+
+    &.is-disabled {
+      pointer-events: none;
+      opacity: var(--Button-onDisabled-opacity);
+    }
+  }
+}
+
+.#{$ns}SubFormControl {
+  padding-top: calc(var(--Form-input-height) - var(--SubForm--addBtn-height));
+}

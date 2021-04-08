@@ -1,0 +1,32 @@
+.#{$ns}TextareaControl {
+  border: 1px solid var(--Form-input-borderColor);
+  border-radius: var(--Form-input-borderRadius);
+  line-height: var(--Form-input-lineHeight);
+  background: var(--Form-input-bg);
+  padding: px2rem(6px)
+    calc(
+      var(--Form-input-height) - var(--Form-input-lineHeight) *
+        var(--Form-input-fontSize) - #{px2rem(2px)}
+    );
+  font-size: var(--Form-input-fontSize);
+  outline: none;
+  resize: none;
+  display: block;
+  width: 100%;
+
+  &.is-error {
+    border-color: var(--Form-input-onError-borderColor);
+  }
+
+  &:focus,
+  &.is-focused {
+    border-color: var(--Form-input-onFocused-borderColor);
+    box-shadow: var(--Form-input-boxShadow);
+  }
+
+  &.is-disabled,
+  &[disabled] {
+    background: $gray200;
+    color: var(--text--muted-color);
+  }
+}
