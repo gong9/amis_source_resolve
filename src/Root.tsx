@@ -168,5 +168,6 @@ export function renderChild(
     />
   );
 }
+console.log(`步骤2 ${Scoped(Root)}`);
 
 export default Scoped(Root);

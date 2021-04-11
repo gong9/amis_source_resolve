@@ -137,13 +137,19 @@ export function filterSchema(
     schema
   ) as Schema;
 }
-
+//gong 这个函数做了些什么东西呢？
 export function Renderer(config: RendererBasicConfig) {
+  //gong 这里接收一个模板组件
   return function <T extends RendererComponent>(component: T): T {
+
     const renderer = registerRenderer({
       ...config,
       component: component
     });
+    console.log(' //gong 这里接收一个模板组件');
+
+    console.log(renderer);
+
     return renderer.component as T;
   };
 }
@@ -318,7 +324,7 @@ export function render(
 ): JSX.Element {
 
   //gong
-  console.log(schema);
+  console.log(`步骤1开始${schema}`);
 
   let locale = props.locale || getDefaultLocale();
   // 兼容 locale 的不同写法

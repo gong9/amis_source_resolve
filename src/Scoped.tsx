@@ -271,8 +271,6 @@ export function HocScoped<
   }
 
   hoistNonReactStatic(ScopedComponent, ComposedComponent);
-  console.log('gong===========这里应该时最后走得了吧');
-
   return ScopedComponent;
 }
 
